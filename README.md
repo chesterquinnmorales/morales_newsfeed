@@ -1,3 +1,3 @@
 # morales_mobprog
 
-A new Flutter project.
+I integrated the image into the NewsFeedCard widget by using a nullable boolean variable called hasImage. This variable allows the widget to dynamically determine whether an image should be displayed in a post. Inside the build() method, I used a conditional statement that checks if hasImage is set to true. When the condition is true, the PostImage widget is rendered and displays the image from the specified asset path. Otherwise, the image section is skipped, and only the text content of the post is shown. This approach makes the NewsFeedCard reusable and flexible because it can handle both posts with images and posts without images using the same widget. As a result, the news feed behaves more like a real social media application where different posts may contain different types of content.
