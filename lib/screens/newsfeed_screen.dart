@@ -1,70 +1,94 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:morales_mobprog/constant.dart';
-import 'package:morales_mobprog/screens/home_screen.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:morales_mobprog/widgets/custom_text.dart';
+import 'package:morales_mobprog/widgets/newsfeed_card.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-  final PageController _pageController = PageController();
-
+class NewsfeedScreen extends StatelessWidget {
+  const NewsfeedScreen({super.key});
+ 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shadowColor: fbTextColorWhite,
-        elevation: 1,
-        title: CustomText(
-          text: 'Facebook',
-          fontSize: ScreenUtil().setSp(25),
-          color: fbPrimary,
-          fontFamily: 'Klavika',
-          fontWeight: FontWeight.w700,
+    return ListView(
+      children: const [
+        NewsfeedCard(
+          userName: 'Rocket Raccoon',
+          postContent:
+              'Quit smiling, you idiot. You are supposed to be a professional. I am Groot.',
+          date: '2 hours ago',
+          numOfLikes: 11089,
         ),
-      ),
-      body: PageView(
-        controller: _pageController,
-        children: const <Widget>[
-          NewsfeedScreen(),
-        ],
-        onPageChanged: (page) {
-          setState(() {
-            _selectedIndex = page;
-          });
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        onTap: _onTappedBar,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-        ],
-        selectedItemColor: fbPrimary,
-        currentIndex: _selectedIndex,
-      ),
+
+        NewsfeedCard(
+          userName: 'Doctor Doom',
+          postContent:
+              'Latveria does not follow the future. Latveria creates it.',
+          date: '15 minutes ago',
+          numOfLikes: 24567,
+        ),
+
+        NewsfeedCard(
+          userName: 'Doctor Strange',
+          postContent:
+              'The boundaries between dimensions are weakening. Stay vigilant.',
+          date: '32 minutes ago',
+          numOfLikes: 18932,
+        ),
+
+        NewsfeedCard(
+          userName: 'Spider-Man',
+          postContent:
+              'Another busy day in New York. The city never sleeps.',
+          date: '1 hour ago',
+          numOfLikes: 21045,
+        ),
+
+        NewsfeedCard(
+          userName: 'Black Panther',
+          postContent:
+              'Wakanda continues to push the limits of science and innovation.',
+          date: '2 hours ago',
+          numOfLikes: 27654,
+        ),
+
+        NewsfeedCard(
+          userName: 'Doctor Doom',
+          postContent:
+              'Reed Richards seeks answers. Doom already possesses them.',
+          date: '3 hours ago',
+          numOfLikes: 30124,
+        ),
+
+        NewsfeedCard(
+          userName: 'Iron Man',
+          postContent:
+              'Testing a new suit upgrade. What could possibly go wrong?',
+          date: '5 hours ago',
+          numOfLikes: 35489,
+        ),
+
+        NewsfeedCard(
+          userName: 'Thor',
+          postContent:
+              'Midgard remains under the protection of Asgard.',
+          date: '8 hours ago',
+          numOfLikes: 28841,
+        ),
+
+        NewsfeedCard(
+          userName: 'Doctor Doom',
+          postContent:
+              'Power without wisdom is chaos. Fortunately, Doom possesses both.',
+          date: '12 hours ago',
+          numOfLikes: 41205,
+        ),
+ 
+        NewsfeedCard(
+          userName: 'I am Groot',
+          postContent:
+              'I am Groot!',
+          date: 'December 1, 2023',
+          numOfLikes: 10953,
+          hasImage: true,
+        ),
+      ],
     );
-  }
-
-  void _onTappedBar(int value) {
-    setState(() {
-      _selectedIndex = value;
-    });
-
-    _pageController.jumpToPage(value);
   }
 }

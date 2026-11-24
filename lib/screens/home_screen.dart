@@ -1,27 +1,77 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:morales_mobprog/widgets/newsfeed_card.dart';
+import 'package:morales_mobprog/constant.dart';
+import 'package:morales_mobprog/screens/newsfeed_screen.dart';
+import 'package:morales_mobprog/screens/notification_screen.dart';
+import 'package:morales_mobprog/widgets/custom_text.dart';
 
-class NewsfeedScreen extends StatelessWidget {
-  const NewsfeedScreen({super.key});
-
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+ 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+ 
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+ 
+  final PageController _pageController = PageController();
+ 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        NewsfeedCard(
-          userName: 'Rocket Raccoon',
-          postContent: 'Quit smiling, you idiot. You’re supposed to be a professional! #AvengersAssemble',
-          date: '2 hours ago',
-          numOfLikes: 10,
+    return Scaffold(
+      appBar: AppBar(
+        shadowColor: fbTextColorWhite,
+        elevation: 2,
+        title: CustomText(
+          text: 'Marvel',
+          fontSize: ScreenUtil().setSp(25),
+          color: fbPrimary,
+          fontFamily: 'Klavika',
+          fontWeight: FontWeight.w700,
         ),
-        NewsfeedCard(
-          userName: 'i am Groot',
-          postContent: 'I am Groot. #GeniusBillionairePlayboyPhilanthropist',
-          date: 'December 1, 2023',
-          numOfLikes: 3000,
-          hasImage: true,
-        ),
-      ],
+      ),
+ 
+      body: PageView(
+        controller: _pageController,
+        children: const <Widget>[
+          NewsfeedScreen(),
+          NotificationScreen(),
+        ],
+        onPageChanged: (page) {
+          setState(() {
+            _selectedIndex = page;
+          });
+        },
+      ),
+ 
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: false,
+        showSelectedLabels: false,
+        onTap: _onTappedBar,
+ 
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
+        ],
+ 
+        selectedItemColor: fbPrimary,
+        currentIndex: _selectedIndex,
+      ),
     );
+  }
+ 
+  void _onTappedBar(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+ 
+    _pageController.jumpToPage(value);
   }
 }
